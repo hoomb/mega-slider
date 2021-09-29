@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mega Slider</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" type="text/css">
+  <link rel="stylesheet" href="styles/animations.css" type="text/css">
+</head>
+<body>
+<div class="container">
+  <img class="logo" src="images/logo.png" alt="logo">
+
+  <!-- Slide 1 -->
+  <div id="slide-1" class="slide-container active">
+    <div class="back-top"></div>
+    <div class="middle">
+      <div class="left-text">
+        <h2>01.</h2>
+        <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
+      </div>
+      <div class="spirit"></div>
+      <div class="right-text">
+        Spirit<br/>
+        of Nature
+      </div>
+    </div>
+    <div class="back-bottom"></div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div id="slide-2" class="slide-container">
+    <div class="back-top"></div>
+    <div class="middle">
+      <div class="left-text">
+        <h2>02.</h2>
+        <span>invidunt ut labore et dolore magna aliquyam erat est Lorem ipsum dolor sit amet.</span>
+      </div>
+      <div class="spirit"></div>
+      <div class="right-text">
+        Spirit<br/>
+        of Space
+      </div>
+    </div>
+    <div class="back-bottom"></div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div id="slide-3" class="slide-container">
+    <div class="back-top"></div>
+    <div class="middle">
+      <div class="left-text">
+        <h2>03.</h2>
+        <span>magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</span>
+      </div>
+      <div class="spirit"></div>
+      <div class="right-text">
+        Spirit<br/>
+        of Desert
+      </div>
+    </div>
+    <div class="back-bottom"></div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div id="slide-4" class="slide-container">
+    <div class="back-top"></div>
+    <div class="middle">
+      <div class="left-text">
+        <h2>04.</h2>
+        <span>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+      </div>
+      <div class="spirit"></div>
+      <div class="right-text">
+        Spirit<br/>
+        of Forest
+      </div>
+    </div>
+    <div class="back-bottom"></div>
+  </div>
+
+  <div class="controller">
+    <div id="prev-button" class="button">Back</div>
+    <div class="progress">
+      <div class="value"></div>
+    </div>
+    <div id="next-button" class="button">Next</div>
+  </div>
+</div>
+</body>
+
+<script>
+    var currentSlide = 1;
+
+    function updateClasses(step) {
+        document.getElementById('slide-' + currentSlide).classList.remove('active');
+        document.getElementById('slide-' + (currentSlide + step)).classList.add('active');
+
+        document.querySelector('#slide-' + currentSlide + ' .back-top').classList.remove('slide-in-right', 'slide-out-right');
+        document.querySelector('#slide-' + currentSlide + ' .back-bottom').classList.remove('slide-in-left', 'slide-out-left');
+        document.querySelector('#slide-' + currentSlide + ' .spirit').classList.remove('slide-in-fwd', 'slide-out-bck');
+        document.querySelector('#slide-' + (currentSlide + step) + ' .back-top').classList.remove('slide-in-right', 'slide-out-right');
+        document.querySelector('#slide-' + (currentSlide + step) + ' .back-bottom').classList.remove('slide-in-left', 'slide-out-left');
+        document.querySelector('#slide-' + (currentSlide + step) + ' .spirit').classList.remove('slide-in-fwd', 'slide-out-bck');
+
+        document.querySelector('.value').style.width = ((currentSlide + step) * 25) + '%';
+
+        document.querySelector('#slide-' + currentSlide + ' .back-top').classList.add('slide-out-right');
+        document.querySelector('#slide-' + currentSlide + ' .back-bottom').classList.add('slide-out-left');
+
+        window.setTimeout(function() {
+            document.querySelector('#slide-' + (currentSlide + step) + ' .back-top').classList.add('slide-in-right');
+            document.querySelector('#slide-' + (currentSlide + step) + ' .back-bottom').classList.add('slide-in-left');
+
+            document.querySelector('#slide-' + currentSlide + ' .spirit').classList.add('slide-out-bck');
+            document.querySelector('#slide-' + (currentSlide + step) + ' .spirit').classList.add('slide-in-fwd');
+
+            currentSlide = currentSlide + step;
+        }, 500);
+    }
+
+    document.getElementById('next-button').addEventListener('click', function() {
+        if (currentSlide === 4) return;
+        updateClasses(1);
+    });
+
+    document.getElementById('prev-button').addEventListener('click', function() {
+        if (currentSlide === 1) return;
+        updateClasses(-1);
+    });
+
+</script>
+
+</html>
